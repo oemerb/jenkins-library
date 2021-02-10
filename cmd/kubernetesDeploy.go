@@ -56,6 +56,13 @@ func runHelmDeploy(config kubernetesDeployOptions, command command.ExecRunner, s
 	if err != nil {
 		log.Entry().WithError(err).Fatalf("Container image '%v' incorrect", config.Image)
 	}
+	if config.ChartPath != "" {
+	log.Entry().WithError(err).Fatal("Chart path has not been set. Please configure the 'chartPath'.")
+	}
+	if config.DeploymentName != "" {
+	log.Entry().WithError(err).Fatal("Deployment name has not been set. Please configure the 'deploymentName'.")
+	}
+
 	helmLogFields := map[string]interface{}{}
 	helmLogFields["Chart Path"] = config.ChartPath
 	helmLogFields["Namespace"] = config.Namespace
